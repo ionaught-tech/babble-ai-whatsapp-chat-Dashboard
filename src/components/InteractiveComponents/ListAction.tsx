@@ -10,7 +10,7 @@ const ListAction = ({
   const handleSectionChange = (
     sectionIndex: number,
     field: keyof sectionType,
-    value: any,
+    value: any
   ) => {
     const updatedButtons = [...formData.interactiveButtons];
     const button = updatedButtons[0];
@@ -35,7 +35,7 @@ const ListAction = ({
   const handleOptionChange = (
     sectionIndex: number,
     optionIndex: number,
-    newValue: string,
+    newValue: string
   ) => {
     const updatedButtons = [...formData.interactiveButtons];
     const button = updatedButtons[0];
@@ -78,7 +78,7 @@ const ListAction = ({
 
   const removeOptionFromSection = (
     sectionIndex: number,
-    optionIndex: number,
+    optionIndex: number
   ) => {
     const updatedButtons = [...formData.interactiveButtons];
     const button = updatedButtons[0];
@@ -180,21 +180,26 @@ const ListAction = ({
                 </button>
               )}
             </div>
-            <input
-              type="text"
-              placeholder="Section Title"
-              value={section.sectionTitle}
-              onChange={(e) =>
-                handleSectionChange(
-                  sectionIndex,
-                  "sectionTitle",
-                  e.target.value,
-                )
-              }
-              className="w-full px-2 py-1 mb-2 border border-neutral-200 rounded"
-            />
+            <div className="w-full">
+              <input
+                type="text"
+                placeholder="Section Title"
+                value={section.sectionTitle}
+                onChange={(e) =>
+                  handleSectionChange(
+                    sectionIndex,
+                    "sectionTitle",
+                    e.target.value
+                  )
+                }
+                className="w-11/12 px-2 py-1 mb-2 border border-neutral-200 rounded"
+              />
+            </div>
             {section.options.map((option, optionIndex) => (
-              <div key={optionIndex} className="flex items-center gap-2 mb-1">
+              <div
+                key={optionIndex}
+                className="flex justify-between  gap-2 mb-1"
+              >
                 <input
                   type="text"
                   placeholder={`Option ${optionIndex + 1}`}
@@ -203,10 +208,10 @@ const ListAction = ({
                     handleOptionChange(
                       sectionIndex,
                       optionIndex,
-                      e.target.value,
+                      e.target.value
                     )
                   }
-                  className="flex-1 px-2 py-1 border border-neutral-200 rounded"
+                  className="w-11/12 px-2 py-1 border border-neutral-200 rounded"
                 />
                 {optionIndex > 0 && (
                   <button
@@ -218,7 +223,7 @@ const ListAction = ({
                   >
                     <img
                       src={sectionDelete}
-                      alt="Double Tick"
+                      alt="delete section"
                       width={15}
                       height={15}
                       className="w-4 h-4 object-contain"

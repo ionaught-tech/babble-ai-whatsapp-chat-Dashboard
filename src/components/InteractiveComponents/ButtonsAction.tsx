@@ -44,13 +44,13 @@ const ButtonsAction = ({
       {formData.interactiveButtons.map((btnValue, btnIndex) => (
         <div key={btnIndex} className="rounded grid gap-2 ">
           <div className="text-sm font-medium">Button {btnIndex + 1}</div>
-          <div className="flex gap-2">
+          <div className="flex justify-between gap-2">
             <input
               type="text"
               placeholder="Button Label"
               value={btnValue.buttonLabel}
               onChange={(e) => handleButtonChange(btnIndex, e.target.value)}
-              className="w-full px-2 py-1 border border-neutral-200 rounded"
+              className="w-11/12 px-2 py-1 border border-neutral-200 rounded"
             />
             {btnIndex > 0 && (
               <button
@@ -60,7 +60,7 @@ const ButtonsAction = ({
               >
                 <img
                   src={sectionDelete}
-                  alt="Double Tick"
+                  alt="delete section"
                   width={15}
                   height={15}
                   className="w-4 h-4 object-contain"

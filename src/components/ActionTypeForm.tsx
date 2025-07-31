@@ -47,7 +47,7 @@ const ActionTypeForm = () => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -75,9 +75,9 @@ const ActionTypeForm = () => {
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center ">
       <form
         onClick={(e) => e.stopPropagation()}
-        className="grid  grid-cols-[3fr_2fr] bg-white rounded-xl p-6 gap-6 max-w-5xl w-full  overflow-y-auto max-h-11/12 "
+        className="grid  grid-cols-[3fr_2fr] bg-white rounded-xl p-6 gap-6 max-w-5xl w-full  overflow-y-auto h-screen"
       >
-        <div className="grid">
+        <div className="">
           <div className="text-lg font-semibold mb-1">Content</div>
           <div className="text-sm text-gray-600 mb-4">
             Fill out the header, body and footer sections
