@@ -11,18 +11,21 @@ const ButtonsAction = ({
   const addNewInteractiveButton = () => {
     setFormData((prev) => ({
       ...prev,
-      interactiveButtons: [...prev.interactiveButtons, { buttonLabel: "" }],
+      interactiveButtons: [
+        ...(prev.interactiveButtons ?? []),
+        { buttonLabel: "" },
+      ],
     }));
   };
 
   const handleButtonChange = (index: number, newValue: string) => {
-    const updated = [...formData.interactiveButtons];
+    const updated = [...(formData.interactiveButtons ?? [])];
     updated[index] = { buttonLabel: newValue };
     setFormData((prev) => ({ ...prev, interactiveButtons: updated }));
   };
 
   const removeButton = (index: number) => {
-    const updated = [...formData.interactiveButtons];
+    const updated = [...(formData.interactiveButtons ?? [])];
     updated.splice(index, 1);
     setFormData((prev) => ({ ...prev, interactiveButtons: updated }));
   };
@@ -30,7 +33,7 @@ const ButtonsAction = ({
   return (
     <div className="border border-gray-300 rounded-lg p-5 grid gap-2 mt-4">
       <div className="flex justify-end">
-        {formData.interactiveButtons.length < 3 && (
+        {(formData.interactiveButtons?.length ?? 0) < 3 && (
           <button
             type="button"
             onClick={addNewInteractiveButton}
@@ -41,7 +44,7 @@ const ButtonsAction = ({
         )}
       </div>
 
-      {formData.interactiveButtons.map((btnValue, btnIndex) => (
+      {formData.interactiveButtons?.map((btnValue, btnIndex) => (
         <div key={btnIndex} className="rounded grid gap-2 ">
           <div className="text-sm font-medium">Button {btnIndex + 1}</div>
           <div className="flex justify-between gap-2">

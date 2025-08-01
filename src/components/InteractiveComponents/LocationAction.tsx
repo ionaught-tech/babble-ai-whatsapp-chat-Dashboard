@@ -8,13 +8,21 @@ const LocationAction = ({
   setFormData: React.Dispatch<React.SetStateAction<ActionTypeFormProps>>;
 }) => {
   const handleButtonChange = (newValue: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      interactiveButtons: [
-        ...prev.interactiveButtons,
-        { buttonLabel: newValue },
-      ],
-    }));
+    setFormData((prev) => {
+      const updatedButtons = prev.interactiveButtons?.length
+        ? [...prev.interactiveButtons]
+        : [{ buttonLabel: "" }];
+
+      updatedButtons[0] = {
+        ...updatedButtons[0],
+        buttonLabel: newValue,
+      };
+
+      return {
+        ...prev,
+        interactiveButtons: updatedButtons,
+      };
+    });
   };
 
   return (
@@ -23,7 +31,7 @@ const LocationAction = ({
       <input
         type="text"
         placeholder="Enter button label"
-        value={formData.interactiveButtons[0]?.buttonLabel || ""}
+        value={formData.interactiveButtons?.[0]?.buttonLabel || ""}
         onChange={(e) => handleButtonChange(e.target.value)}
         className="w-full px-2 py-1 border border-neutral-200 rounded"
       />

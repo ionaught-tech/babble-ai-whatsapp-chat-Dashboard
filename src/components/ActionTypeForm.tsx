@@ -1,11 +1,10 @@
-import previewImage from "../Assets/preview.png";
-import previewBackground from "../Assets/whatsapp-background.jpg";
-import DoubleTick from "../Assets/doubleTick.svg";
 import { useState } from "react";
 import ButtonsAction from "./InteractiveComponents/ButtonsAction";
 import LocationAction from "./InteractiveComponents/LocationAction";
 import ListAction from "./InteractiveComponents/ListAction";
 import AddressAction from "./InteractiveComponents/AddressAction";
+import FormPreview from "./FormPreview";
+import LinkAction from "./InteractiveComponents/LinkAction";
 
 export type sectionType = {
   sectionTitle: string;
@@ -14,7 +13,7 @@ export type sectionType = {
 
 export type interactiveButtonsProps = {
   buttonLabel: string;
-  body?: sectionType[];
+  buttonContent?: string;
 };
 
 export type ActionTypeFormProps = {
@@ -22,7 +21,8 @@ export type ActionTypeFormProps = {
   body: string;
   footer: string;
   actionType: string;
-  interactiveButtons: interactiveButtonsProps[];
+  interactiveButtons?: interactiveButtonsProps[];
+  sections?: sectionType[];
 };
 
 const actionTypes = ["Buttons", "List", "Link", "Address", "Location"];
@@ -36,12 +36,13 @@ const ActionTypeForm = () => {
     interactiveButtons: [
       {
         buttonLabel: "",
-        body: [
-          {
-            sectionTitle: "",
-            options: [""],
-          },
-        ],
+        buttonContent: "",
+      },
+    ],
+    sections: [
+      {
+        sectionTitle: "",
+        options: [""],
       },
     ],
   });
@@ -60,12 +61,13 @@ const ActionTypeForm = () => {
       interactiveButtons: [
         {
           buttonLabel: "",
-          body: [
-            {
-              sectionTitle: "",
-              options: [""],
-            },
-          ],
+          buttonContent: "",
+        },
+      ],
+      sections: [
+        {
+          sectionTitle: "",
+          options: [""],
         },
       ],
     }));
@@ -141,6 +143,9 @@ const ActionTypeForm = () => {
           {formData.actionType === "Address" && (
             <AddressAction formData={formData} setFormData={setFormData} />
           )}
+          {formData.actionType === "Link" && (
+            <LinkAction formData={formData} setFormData={setFormData} />
+          )}
 
           <div className="flex justify-end">
             <button
@@ -151,50 +156,7 @@ const ActionTypeForm = () => {
             </button>
           </div>
         </div>
-
-        <div className="grid items-center">
-          <div>
-            <div className="text-lg font-semibold p-3 bg-gray-400">Preview</div>
-            <div
-              style={{ backgroundImage: `url(${previewBackground})` }}
-              className="bg-cover bg-center flex items-center justify-center  p-4 rounded-lg"
-            >
-              <div className="p-2 bg-white rounded-lg">
-                <div className="aspect-video">
-                  <img
-                    src={previewImage}
-                    alt="Image"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </div>
-                <div className="w-full max-w-xs">
-                  {" "}
-                  <div className="font-bold line-clamp-1 break-words">
-                    {formData.header}
-                  </div>
-                  <div className="line-clamp-3 break-words">
-                    {formData.body}
-                  </div>
-                  <div className="text-xs text-gray-500 flex justify-between">
-                    <div className="line-clamp-1 break-words max-w-[70%]">
-                      {formData.footer}
-                    </div>
-                    <div className="flex gap-1 shrink-0 items-center">
-                      <div>10:56 am</div>
-                      <img
-                        src={DoubleTick}
-                        alt="Double Tick"
-                        width={12}
-                        height={12}
-                        className="w-3 h-3 object-contain"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <FormPreview formData={formData} />
       </form>
     </div>
   );
