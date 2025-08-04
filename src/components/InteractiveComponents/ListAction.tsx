@@ -1,5 +1,6 @@
 import type { ActionTypeFormProps, sectionType } from "../ActionTypeForm";
 import sectionDelete from "../../Assets/sectionDelete.svg";
+import { useEffect, useRef } from "react";
 
 const ListAction = ({
   formData,
@@ -111,6 +112,14 @@ const ListAction = ({
     }));
   };
 
+  const lastOptionRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (lastOptionRef.current) {
+      lastOptionRef.current.focus();
+    }
+  }, [formData.sections?.map((s) => s.options.length).join(",")]);
+
   return (
     <div className="border-gray-300 grid gap-2 mt-4">
       <div className="mb-2">
@@ -123,15 +132,6 @@ const ListAction = ({
         onChange={(e) => handleButtonChange(e.target.value)}
         className="w-full px-2 py-1 mb-2 border border-neutral-200 rounded"
       />
-      <div className="flex justify-end">
-        <button
-          type="button"
-          onClick={addNewSection}
-          className="text-xs font-bold border border-neutral-200 px-4 py-2 rounded-lg"
-        >
-          + Add Section
-        </button>
-      </div>
 
       <div className="space-y-2">
         {formData.sections?.map((section, sectionIndex) => (
@@ -171,6 +171,14 @@ const ListAction = ({
                 className="flex justify-between gap-2 mb-1"
               >
                 <input
+                  key={optionIndex}
+                  ref={
+                    formData.sections &&
+                    sectionIndex === formData.sections.length - 1 &&
+                    optionIndex === section.options.length - 1
+                      ? lastOptionRef
+                      : null
+                  }
                   type="text"
                   placeholder={`Option ${optionIndex + 1}`}
                   value={option}
@@ -213,6 +221,15 @@ const ListAction = ({
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex ">
+        <button
+          type="button"
+          onClick={addNewSection}
+          className="text-xs font-bold border border-neutral-200 px-4 py-2 rounded-lg"
+        >
+          + Add Section
+        </button>
       </div>
     </div>
   );

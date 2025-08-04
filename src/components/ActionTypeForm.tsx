@@ -73,6 +73,11 @@ const ActionTypeForm = () => {
     }));
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+  };
+
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center ">
       <form
@@ -149,6 +154,7 @@ const ActionTypeForm = () => {
 
           <div className="flex justify-end">
             <button
+              onClick={handleSubmit}
               type="submit"
               className="mt-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >

@@ -1,5 +1,6 @@
 import type { ActionTypeFormProps } from "../ActionTypeForm";
 import sectionDelete from "../../Assets/sectionDelete.svg";
+import { useEffect, useRef } from "react";
 
 const ButtonsAction = ({
   formData,
@@ -29,6 +30,14 @@ const ButtonsAction = ({
     updated.splice(index, 1);
     setFormData((prev) => ({ ...prev, interactiveButtons: updated }));
   };
+  // const [isLast, setIslast] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [formData.interactiveButtons?.length]);
 
   return (
     <div className="border border-gray-300 rounded-lg p-5 grid gap-2 mt-4">
@@ -49,6 +58,12 @@ const ButtonsAction = ({
           <div className="text-sm font-medium">Button {btnIndex + 1}</div>
           <div className="flex justify-between gap-2">
             <input
+              key={btnIndex}
+              ref={
+                btnIndex === (formData.interactiveButtons?.length ?? 0) - 1
+                  ? inputRef
+                  : null
+              }
               type="text"
               placeholder="Button Label"
               value={btnValue.buttonLabel}
