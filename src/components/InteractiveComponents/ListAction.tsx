@@ -12,7 +12,7 @@ const ListAction = ({
   const handleSectionChange = (
     sectionIndex: number,
     field: keyof sectionType,
-    value: any
+    value: any,
   ) => {
     const updatedSections = [...(formData.sections ?? [])];
     updatedSections[sectionIndex] = {
@@ -29,7 +29,7 @@ const ListAction = ({
   const handleOptionChange = (
     sectionIndex: number,
     optionIndex: number,
-    newValue: string
+    newValue: string,
   ) => {
     const updatedSections = [...(formData.sections ?? [])];
     const options = [...(updatedSections[sectionIndex].options ?? [])];
@@ -58,7 +58,7 @@ const ListAction = ({
 
   const removeOptionFromSection = (
     sectionIndex: number,
-    optionIndex: number
+    optionIndex: number,
   ) => {
     const updatedSections = [...(formData.sections ?? [])];
     const options = [...(updatedSections[sectionIndex].options ?? [])];
@@ -159,7 +159,7 @@ const ListAction = ({
                   handleSectionChange(
                     sectionIndex,
                     "sectionTitle",
-                    e.target.value
+                    e.target.value,
                   )
                 }
                 className="w-11/12 px-2 py-1 mb-2 border border-neutral-200 rounded"
@@ -186,7 +186,7 @@ const ListAction = ({
                     handleOptionChange(
                       sectionIndex,
                       optionIndex,
-                      e.target.value
+                      e.target.value,
                     )
                   }
                   className="w-11/12 px-2 py-1 border border-neutral-200 rounded"
